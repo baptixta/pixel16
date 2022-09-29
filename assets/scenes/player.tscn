@@ -57,6 +57,7 @@ tracks/0/keys = {
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
+speed = 80
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -71,3 +72,9 @@ shape = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 anims/idle = SubResource( 3 )
 anims/walk = SubResource( 4 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+smoothing_enabled = true
+smoothing_speed = 8.0

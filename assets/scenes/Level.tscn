@@ -9,4 +9,4 @@
 position = Vector2( 14, 15 )
 
 [node name="PhysicsObject" parent="." instance=ExtResource( 1 )]
-position = Vector2( 38, 17 )
+position = Vector2( 46, 17 )
