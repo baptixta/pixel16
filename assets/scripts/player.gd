@@ -1,7 +1,9 @@
 extends KinematicBody2D
+class_name Player
 
 onready var animation: AnimationPlayer = get_node("AnimationPlayer")
 onready var sprite: Sprite = get_node("Sprite")
+onready var weapon: Sprite = get_node("Weapon")
 var velocity: Vector2
 export(int) var speed
 
@@ -9,8 +11,8 @@ export(int) var speed
 func _physics_process(_delta):
 	move()
 	animate()
-	verifyPosition()
-	
+	verifyPosition()	
+	moveWeapon()
 
 func move() -> void:
 	var direction_vector: Vector2 = Vector2(
@@ -30,5 +32,8 @@ func animate() -> void:
 func verifyPosition() -> void:
 	if velocity.x < 0:
 		sprite.flip_h = true
-	else:
+	elif velocity.x > 0:
 		sprite.flip_h = false
+
+func moveWeapon():
+	weapon.look_at(get_global_mouse_position())
