@@ -89,7 +89,7 @@ script = ExtResource( 1 )
 rotation = 0.174533
 region_rect = Rect2( 1, 1, 1, 1 )
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." groups=["enemies"]]
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
