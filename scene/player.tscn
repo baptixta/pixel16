@@ -1,0 +1,136 @@
+[gd_scene load_steps=10 format=3 uid="uid://dllvjflj1si8e"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_d7tdh"]
+[ext_resource type="PackedScene" uid="uid://cmrnd13ghmh86" path="res://art/player.gltf" id="2_8dy7g"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jttrh"]
+lifetime_randomness = 0.56
+emission_shape = 3
+emission_box_extents = Vector3(0.3, 0, 0.4)
+spread = 120.79
+gravity = Vector3(0, 0, 2)
+angle_max = 72.0
+scale_min = 0.5
+color = Color(0.807843, 0.45098, 0.819608, 0.717647)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hscwq"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5g5pw"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_df8w6"]
+height = 0.254166
+radius = 1.26857
+
+[sub_resource type="Animation" id="Animation_5r4ng"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Character:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Character:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_afnat"]
+resource_name = "float"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Character:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.7, 1.2),
+"transitions": PackedFloat32Array(0.37893, 2.82843, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.65, 0), Vector3(0, 0.35, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Character:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.5, 1.2),
+"transitions": PackedFloat32Array(0.37893, 0.435276, 1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0), Vector3(0.139626, -1.5708, 0), Vector3(-0.15708, -1.5708, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rvsl4"]
+_data = {
+"RESET": SubResource("Animation_5r4ng"),
+"float": SubResource("Animation_afnat")
+}
+
+[node name="Player" type="CharacterBody3D"]
+collision_mask = 6
+script = ExtResource("1_d7tdh")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00145817, 0.00891614, 0.00118446)
+
+[node name="Character" parent="Pivot" instance=ExtResource("2_8dy7g")]
+transform = Transform3D(-7.96398e-06, 0, -2.2, 0, 2.2, 0, 2.2, 0, -7.96398e-06, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.161511, 0)
+light_color = Color(0.545098, 0.760784, 0.780392, 1)
+light_energy = 1.8
+light_size = 0.1
+light_specular = 2.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.229031, 1.35403)
+transparency = 0.2
+amount = 20
+lifetime = 0.37
+preprocess = 0.5
+speed_scale = 1.2
+randomness = 0.2
+visibility_aabb = AABB(-0.811097, -0.925303, -2.44315, 1.62219, 1.01662, 4.8863)
+process_material = SubResource("ParticleProcessMaterial_jttrh")
+draw_pass_1 = SubResource("BoxMesh_hscwq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0.09, 0)
+shape = SubResource("SphereShape3D_5g5pw")
+
+[node name="MobDetector" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.209955, 0)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MobDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.525055, 0)
+shape = SubResource("CylinderShape3D_df8w6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "float"
+libraries = {
+"": SubResource("AnimationLibrary_rvsl4")
+}
+
+[connection signal="body_entered" from="MobDetector" to="." method="_on_mob_detector_body_entered"]
