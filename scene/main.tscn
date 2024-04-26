@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ycs3817632kx"]
+[gd_scene load_steps=16 format=3 uid="uid://ycs3817632kx"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_e6l4n"]
 [ext_resource type="PackedScene" uid="uid://dllvjflj1si8e" path="res://scene/player.tscn" id="1_qgqu6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/scoreLabel.gd" id="5_g3qr2"]
 [ext_resource type="FontFile" uid="uid://dylu4rno8jdbc" path="res://fonts/More 15 Basic.ttf" id="5_olucw"]
 [ext_resource type="Script" path="res://scripts/levelLabel.gd" id="7_403md"]
+[ext_resource type="AudioStream" uid="uid://bdowjwmy2kpcn" path="res://audio/synth-emotions.wav" id="8_7fa50"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4ij3j"]
 
@@ -167,6 +168,11 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("5_olucw")
 theme_override_font_sizes/font_size = 50
 text = "Aperta Enter pra tentar de novo"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_7fa50")
+volume_db = -36.793
+autoplay = true
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

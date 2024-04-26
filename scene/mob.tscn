@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkx35rm254iy5"]
+[gd_scene load_steps=10 format=3 uid="uid://dkx35rm254iy5"]
 
 [ext_resource type="Script" path="res://scripts/mob.gd" id="1_g5s36"]
 [ext_resource type="PackedScene" uid="uid://bipw0smhjao1w" path="res://art/mob.gltf" id="2_hnif2"]
+[ext_resource type="AudioStream" uid="uid://caq4a7403ii7" path="res://audio/sfx/die-woosh.wav" id="3_8ig14"]
+[ext_resource type="AudioStream" uid="uid://bvx35v0xxg7kv" path="res://audio/sfx/monster-walk.wav" id="4_2ekfw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q6ca6"]
 size = Vector3(1.88548, 0.891577, 2.06835)
@@ -149,6 +151,15 @@ autoplay = "float"
 libraries = {
 "": SubResource("AnimationLibrary_6y8jk")
 }
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_8ig14")
+volume_db = -9.921
+
+[node name="MovingSound3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_2ekfw")
+volume_db = -31.632
+autoplay = true
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

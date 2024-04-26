@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dogah7xwxk80o"]
+
+[ext_resource type="AudioStream" uid="uid://bdowjwmy2kpcn" path="res://audio/synth-emotions.wav" id="1_oe73k"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_oe73k")
+volume_db = -24.528
+autoplay = true

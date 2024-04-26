@@ -16,6 +16,9 @@ signal hit
 
 var target_velocity = Vector3.ZERO
 
+func _ready():
+	$AudioStreamPlayer3D.play()
+
 func _physics_process(delta):
 	# Criamos uma variável local para guarar a direção do input
 	var direction = Vector3.ZERO
@@ -30,11 +33,16 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_forward"):
 		direction.z -= 1
 	
-	if direction != Vector3.ZERO:
+	if direction == Vector3.ZERO:
+		$AudioStreamPlayer3D.volume_db = -36.0
+	else:
+		$AudioStreamPlayer3D.volume_db = -32.0
+	
+	if direction != Vector3.ZERO:		
 		direction = direction.normalized()
 		$Pivot.look_at(position + direction, Vector3.UP)
 	
-	if direction != Vector3.ZERO:
+	if direction != Vector3.ZERO:		
 		$AnimationPlayer.speed_scale = 4
 	else:
 		$AnimationPlayer.speed_scale = 1
