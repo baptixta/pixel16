@@ -125,7 +125,7 @@ offset_bottom = -21.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("5_olucw")
 theme_override_font_sizes/font_size = 40
-text = "Nível 1"
+text = "Nivel 1"
 script = ExtResource("7_403md")
 
 [node name="HSlider" type="HSlider" parent="UserInterface/LevelLabel"]

@@ -15,7 +15,7 @@ func level_up():
 	$HSlider.value = 0
 	$HSlider.max_value += 10
 	level += 1
-	text = "Nível: " + str(level)
+	text = "Nivel: " + str(level)
 
 func improve_character():
 	
